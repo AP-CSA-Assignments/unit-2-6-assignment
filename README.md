@@ -1,4 +1,4 @@
-# unit-2-5-assignment
+# unit-2-6-assignment
 
 ## API and Documentation
 Documentation for the shape classes can be found [here](https://coderunner.projectstem.org/docs/shapes/index.html).
@@ -24,107 +24,59 @@ java Main.java
 After you compile the shape classes, you only need to compile and run `Main.java` as usual.
 
 ## Problem 1
-Write code which creates three circles with radius 10.1, 14 and 20.5 respectively. The code should then print the three circles, one on each line, in the order given (i.e. the one with radius 10.1 first and the one with radius 20.5 last). To print the results, use the `toString()` method for the `Circle` class.
-
-For example
-```java
-Circle circ1 = /* code not shown */
-System.out.println(circ1.toString());  // produces desired output
-
-// alternatively
-String output = circ1.toString();
-System.out.println(output);
-```
+Write code that takes input from the user for the radius (double) of a circle, and create a circle with that radius. The program should then print a sentence with the circumference and area of the circle. You should use the appropriate `Circle` methods to obtain the circumference and area of the circle rather than calculating these values yourself.
 
 Sample run:
 ```
-circle with radius 10.1
-circle with radius 14.0
-circle with radius 20.5
+Enter the radius of the circle:
+> 3
+A circle with a radius of 3.0 has a circumference of 18.84955592153876 and an area of 28.274333882308138
 ```
+Hint: You can approach this problem by saving the double (radius) as a variable and then creating the Circle, or you can create the Circle and use methods from the Circle class to set the radius.
 
 ## Problem 2
-Write code which takes three decimal inputs from the user, creates a rectangle with length and width equal to the first input and a rectangle with length and width equal to the second and third input respectively, then prints both of these shapes. To print the results, use the `toString()` method for the `Rectangle` class. 
+Write code that takes an integer input and a double input from the user, and creates a `RegularPolygon` object where the integer is the number of sides and the double is the side length. The code should calculate the area of the `RegularPolygon`, print the area, then increment the number of sides of the `RegularPolygon` by two and print the new area.
 
 Sample run:
 ```
-Type a number for length and width:
-2.6
-Type a length:
-10.4
-Type a width:
-28.9
-rectangle with length 2.6, width 2.6
-rectangle with length 10.4, width 28.9
+Enter number of sides:
+> 4
+Enter the side length:
+> 5.6
+Area with 4 sides: 31.36
+Incrementing the number of sides by two
+Area with 6 sides: 81.47566998803998
 ```
-## Problem 3
-Write code which asks for a side length from the user and creates an equilateral triangle and square with that length. The output that you are printing must utilize the `toString` method inside `RegularPolygon` Class.
-
-Sample run:
-```
-Type a side length:
-7.5
-equilateral triangle with side length 7.5
-square with side length 7.5
-```
-Hint: Make sure you use the right data types when taking user input.
+Hint: You can use either the `addSides` or `setNumSides` methods from the `RegularPolygon` class to increment the number of sides by 2.
 
 ## Sample Solutions
 ```java
 import java.util.Scanner;
 
-public class Prob1
+public class Main
 {
 	public static void main(String[] args)
 	{
+		// Problem 2
 		Scanner sc = new Scanner(System.in);
+		int numSide;
+		double sideLength;
+		RegularPolygon rp;
+
+		System.out.println("Enter number of sides:");
+		numSide = sc.nextInt();
+
+		System.out.println("Enter the side length:");
+		sideLength = sc.nextDouble();
+
+		rp = new RegularPolygon(numSide, sideLength);
+
+		System.out.println("Area with " + rp.getNumSides() + " sides: " + rp.getArea());
 		
-		// Part A
-		System.out.println("Problem 1\n");
+		rp.addSides(2);
+		System.out.println("Incrementing the number of sides by two");
 		
-		Circle c1 = new Circle(10.1);
-		Circle c2 = new Circle(14.0);
-		Circle c3 = new Circle(20.5);
-
-		System.out.println(c1.toString() + "\n" + c2.toString() + "\n" + c3.toString());
-
-		// Part B
-		System.out.println("\nProblem 2\n");
-
-		double lenWid;
-		double len;
-		double wid;
-		Rectangle r1;
-		Rectangle r2;
-
-		System.out.println("Type a number for length and width:");
-		lenWid = sc.nextDouble();
-		
-		System.out.println("Type a length:");
-		len = sc.nextDouble();
-
-		System.out.println("Type a width:");
-		wid = sc.nextDouble();
-
-		r1 = new Rectangle(lenWid);
-		r2 = new Rectangle(len, wid);
-
-		System.out.println(r1.toString() + "\n" + r2.toString());
-
-		// Part C
-		System.out.println("\nProblem 3\n");
-
-		double side;
-		RegularPolygon rp1;
-		RegularPolygon rp2;
-		
-		System.out.println("Type a side length:");
-		side = sc.nextDouble();
-
-		rp1 = new RegularPolygon(side);
-		rp2 = new RegularPolygon(4, side);
-
-		System.out.println(rp1.toString() + "\n" + rp2.toString());
+		System.out.println("Area with " + rp.getNumSides() + " sides: " + rp.getArea());
 	}
 }
 ```
